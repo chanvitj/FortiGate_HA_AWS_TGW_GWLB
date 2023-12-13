@@ -87,12 +87,22 @@ terraform init
 terraform apply
 ```
 
-## How to Access to New Environment  
+## How to Access to New Secure Environment  
 After finish deploying using Terraform, you will see the followings in output.  
 
 - Public IP addresses of all FortiGates  
 - Username and Password  
 - Private IP addresses of all testing machines (Windows, Linux)  
+
+In case that you use FortiFlex License, please follow these steps.  
+- Use browser to https://<public ip of each FortiGate>  
+- Login and change default password  
+- SSH to <public ip of each FortiGate>  
+- Run "exec  vm-license  <FortiFlex-License-Key>"
+- The above step, please remove < and >
+- It will reboot.
+
+If command "exec vm-license ..." is not working, it might because you are in Global VDOM. Please change to FG-traffic VDOM and run again.
 
 Please be noted the "Win1" is Jump Server into this environment. But you should be not be able to RDP to this EC2. You will have to manually create Firewall Policy in FortiGate VM FGT3.  
 
@@ -110,8 +120,8 @@ You should be able to SSH to Web1.
 You should be able to RDP to Win3, Win4.  
 
 ## N-S Inspection  
-Web1 is a Web Server.  
-Traffic from Internet to Web1 will be inspected as N-S inspection (Ingress).  
+Web1 is a Linux Web Server.  
+Traffic from Internet to Web1 (http://<public ip address of ALB>) will be inspected as N-S inspection (Ingress).  
 If you cannot access from Internet to Web, it might because there isn't ALB1 or FortiWeb1 which are showing in diagram. But actually, there isn't. It is plan for next version of this guide. For now, you have to manually deploy AWS ALB or FortiWeb VM.  
 Or, it might because of Firewall Policy of FGT1/2.  
 
@@ -124,3 +134,11 @@ You might check Firewall Policy of FGT1/2 for more details.
 
 ## Other Next-Gen Firewall Features  
 After finish deploying this environment, please feel free to enable next-gen firewall features.  
+
+## Destroy Environment  
+The most important for Demo or POC is, you must destroy everything after finish using them. You can run this command to destroy this environment.  
+```
+terraform destroy
+```
+
+Please be noted if you manually create ALB in previous steps. You must delete it before running terraform destroy.  
