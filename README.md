@@ -11,6 +11,9 @@ Please feel free to use this guide to deploy in Demo, POC, and Production enviro
 In this deployment, you will not see ALB or FortiWeb. It is just the plan for next version of this project.  
 If you need more features or other projects/deployment model, please feel free to contact me.  
 
+## Notes  
+This guide will not focus on how to create VIP, Firewall Policy, Address inside FortiGate GUI.
+
 ## Configuration Files  
 Please feel free to change configuration in the following files to match your requirements.  
 
@@ -119,7 +122,7 @@ At Win2
 You should be able to SSH to Web1.  
 You should be able to RDP to Win3, Win4.  
 
-## N-S Inspection  
+## North-South Inspection (N-S Inspection)  
 Web1 is a Linux Web Server.  
 Traffic from Internet to Web1 (http://<public ip address of ALB>) will be inspected as N-S inspection (Ingress).  
 If you cannot access from Internet to Web, it might because there isn't ALB1 or FortiWeb1 which are showing in diagram. But actually, there isn't. It is plan for next version of this guide. For now, you have to manually deploy AWS ALB or FortiWeb VM.  
@@ -128,7 +131,7 @@ Or, it might because of Firewall Policy of FGT1/2.
 Traffic from Win2/Win3/Win4/Web1 to Internet will be inspected as N-S inspection (Egress).  
 If you cannot access from Win2/Win3/Win4/Web1 to Internet, it might because of Firewall Policy of FGT1/2.  
 
-## E-W Inspection  
+## East-West Inspection (E-W Inspection)  
 Traffic from Win2 to Win3/Win4/Web1 will be inspected as E-W inspection.  
 You might check Firewall Policy of FGT1/2 for more details.  
 
@@ -136,9 +139,11 @@ You might check Firewall Policy of FGT1/2 for more details.
 After finish deploying this environment, please feel free to enable next-gen firewall features.  
 
 ## Destroy Environment  
-The most important for Demo or POC is, you must destroy everything after finish using them. You can run this command to destroy this environment.  
+The important part of this guide for Demo or POC is, you must destroy everything after finish using them. You can run this command to destroy this environment.  
 ```
 terraform destroy
 ```
 
 Please be noted if you manually create ALB in previous steps. You must delete it before running terraform destroy.  
+
+
