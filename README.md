@@ -42,8 +42,8 @@ You can many things such as :-
 
 ### license1.lic, license2.lic, license3.lic  
 In case of PAYG, you don't have to configure these 3 files. You can leave them as empty files.  
-In case of BYOL or FortiFlex, you can change these 3 filenames to be your license filenames.  
-In case of FortiFlex, after all FortiGate VMs starting, you have to change their default password, SSH to those FortiGate VMs, and then apply FortiFlex license keys by using this CLI command.  
+In case of BYOL, you can change these 3 filenames to be your license filenames.  
+In case of BYOL-FortiFlex, you don't have to configure these 3 files. You can leave them as empty files. After all FortiGate VMs starting, you have to change their default password, SSH to those FortiGate VMs, and then apply FortiFlex license keys by using this CLI command.  
 ```
 exec  vm-license  <FortiFlex-License-Key>
 ```
